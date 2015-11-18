@@ -2,6 +2,7 @@
 An API made for use with CubeBrew.
 This loads games in an instant from the API's
 file without using any nasty shell.runs.
+It also adds other useful functions.
 So shell.run-free game loading.
 That's very nice indeed.
 ]]--
@@ -1932,4 +1933,18 @@ local function overMenuInput()
 end
 
 overMenuInput()
+end
+
+function center(y,string)
+	local w,h = term.getSize()
+	local x = (w/2)-(#string/2)
+	term.setCursorPos(x,y)
+	print(string)
+end
+
+function centerSlow(y,string)
+	local w,h = term.getSize()
+	local x = (w/2)-(#string/2)
+	term.setCursorPos(x,y)
+	textutils.slowPrint(string)
 end
