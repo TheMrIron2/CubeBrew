@@ -1,5 +1,16 @@
 --RedCube GUI By Gonow32 and CathrodeRayTube
 --Clock coded by DreamWave
+
+-- Important Information
+-- CubeBrew is an unoffical modification to
+-- REDCUBE by CubeSpace Entertainment.
+-- We claim no rights to any inconveniences
+-- caused by CubeBrewing.
+-- CubeBrew adds numerous features to your RedCube,
+-- including booting games without DRM and [soon]
+-- a CubeBrew Channel.
+-- Thank you for using CubeBrew!
+-- Mr_Iron2, CubeBrew creator
  
 os.loadAPI("CubeAPI")
 local menu = 0
@@ -48,10 +59,10 @@ function drawStart()
   term.setCursorPos(1,h-6)
   term.write(" RedSpace ")
   term.setCursorPos(1,h-7)
+  term.write(" CubeBrew ")
+  term.setCursorPos(1,h-8)
   term.write("          ")
-end
- 
-drawDesktop()
+end drawDesktop()
  
 --error("I reached here!")
  
@@ -124,6 +135,9 @@ while true do
         if fs.exists("disk/startgame") then
           shell.run("disk/startgame")
           drawDesktop()
+        elseif fs.exists("/disk/boot.elf") then
+          shell.run("/disk/boot.elf")
+          drawDesktop()
         else
           textutils.slowPrint("There is a problem with your disk. Please return it to the retailer.")
           sleep(2)
@@ -158,18 +172,15 @@ function drmCheck()
       if fs.exists("disk/startgame") then
         shell.run("disk/startgame")
       else
-        textutils.slowPrint("Game file not found. Going to desktop.")
+        print("Game not found. Returning to Desktop...")
+        drawDesktop()
       end
     else
-      print("Don't copy that floppy.")
-      disk.eject("right")
-      sleep(2)
-      os.reboot()
+      shell.run("/disk/startgame")
+      drawDesktop()
     end
   else
-    print("Don't copy that floppy.")
-    disk.eject("right")
-    sleep(2)
-    os.reboot()
+      shell.run("/disk/startgame")
+      drawDesktop()
   end
 end
