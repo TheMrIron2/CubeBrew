@@ -38,7 +38,6 @@ function drawDesktop()
   term.setBackgroundColour(colours.white)
   term.clear()
   term.setCursorPos(1,1)
-  --error("I reached here")
   image = paintutils.loadImage(".background")
   paintutils.drawImage(image, 1, 1)
   drawTaskbar()
@@ -67,7 +66,7 @@ end drawDesktop()
 --error("I reached here!")
  
 function updateClock()
-  term.setBackgroundColor(colors.red)
+  term.setBackgroundColour(colours.red) -- PROPER ENGLISH!
   local time = textutils.formatTime(os.time(), false)
   term.setCursorPos(w - #time - 1, h)
   write(time)
@@ -88,8 +87,35 @@ while true do
     elseif x >= 1 and x <= 10 and y == h - 2 and menu == 1 then
       os.reboot()
     elseif x >= 1 and x <= 10 and y == h - 4 and menu == 1 then
-      drawDesktop()
-      menu = 0
+      term.setBackgroundColour(colours.grey)
+      term.clear()
+      term.setBackgroundColour(colours.white)
+      term.setCursorPos(1,1)
+      term.clearLine()
+      term.setTextColour(colours.red)
+      center(1,"CubeBrew Disk Booting System v1.0")
+      term.setBackgroundColour(colours.grey)
+      term.setTextColour(colours.white)
+      term.setCursorPos(1,3)
+      print("   Install")
+      print("   Exit")
+
+while true do local evt, button, x, y = os.pullEvent("mouse_click")
+  if y == 3 then if fs.exists("/Games/") then
+  shell.run("cp disk/* /Games/")
+  term.clear()
+  brewapi.centerSlow(8,"Installed!")
+  sleep(0.911)
+  drawDesktop()
+ else fs.makeDir("/Games/")
+  shell.run("cp disk/* /Games/")
+  term.clear()
+  brewapi.centerSlow(8,"Installed!")
+  sleep(0.911)
+  drawDesktop()
+   elseif y == 4 then drawDesktop()
+    else end
+     end
     elseif x >= 1 and x <= 10 and y == h - 5 and menu == 1 then
       term.setBackgroundColour(colours.black)
       term.setTextColour(colours.white)
