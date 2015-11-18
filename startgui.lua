@@ -13,6 +13,8 @@
 -- Mr_Iron2, CubeBrew creator
  
 os.loadAPI("CubeAPI")
+os.loadAPI("BrewAPI")
+
 local menu = 0
 local w,h = term.getSize()
  
@@ -104,13 +106,13 @@ while true do local evt, button, x, y = os.pullEvent("mouse_click")
   if y == 3 then if fs.exists("/Games/") then
   shell.run("cp disk/* /Games/")
   term.clear()
-  brewapi.centerSlow(8,"Installed!")
+  BrewAPI.centerSlow(8,"Installed!")
   sleep(0.911)
   drawDesktop()
  else fs.makeDir("/Games/")
   shell.run("cp disk/* /Games/")
   term.clear()
-  brewapi.centerSlow(8,"Installed!")
+  BrewAPI.centerSlow(8,"Installed!")
   sleep(0.911)
   drawDesktop()
    elseif y == 4 then drawDesktop()
