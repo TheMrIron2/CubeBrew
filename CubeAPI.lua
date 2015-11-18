@@ -1,5 +1,6 @@
 -- RedCube API by Gonow32 and CathrodeRayTube
 -- Designed for the RedCube games console
+-- Modified for use with CubeBrew.
  
 function clearScr(backColour, textColour)
   term.setBackgroundColour(backColour)
@@ -7,7 +8,11 @@ function clearScr(backColour, textColour)
   term.clear()
   term.setCursorPos(1,1)
 end
- 
+
+function resetCursor()
+  term.setCursorPos(1,1)
+end
+
 function checkForSaveFolder()
   if fs.exists("saves") and fs.isDir("saves") then
     return true
